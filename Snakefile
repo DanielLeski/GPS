@@ -1,6 +1,8 @@
 configfile: "config.yaml"
 
 #Notes:
+# Rule 0: Link the files like shown within the other pipeline 
+
 # Rule 1: Opening and writing the files these fastq.gz files into a different directory
   input: from config file
   output: getting the files into a specific directory
