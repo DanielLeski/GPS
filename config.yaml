@@ -1,0 +1,3 @@
+#inputs of the fastq.gz files
+input_fastq_dir: /home/dan/camda
+
