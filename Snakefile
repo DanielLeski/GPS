@@ -1,20 +1,30 @@
 configfile: "/home/dan/fun/GPS/config.yaml"
 
+rule link_fastq:
+    input:
+        src=lambda wildcards: "%s/{samples}" % config['input_fastq_dir']
+    output:
+        "data/filtered_fastq/{sample}"
+    threads:
+        1
+    shell:
+        "ln -s {input.src} {output}"
+
 rule filter_fastq:
      input:
-         fastq="/home/dan/camda/{sample}",
+         fastq="/home/dan/camda/{sample}"
      output:
-         "data/filtered_fastq/{sample}.filtered.gz"
+         "data/filtered_fastq/{sample}"
      threads:
          4
      shell:
-        "fastqc {input.fastq}"  
+        "fastqc {input.fastq} {output}"  
 
 
 #top-level rule
 rule setup_inputs:
     input:
-        filtered_fastq=expand("data/filtered_fastq/{sample}.filtered.gz", sample=config["samples"])
+        filtered_fastq=expand("data/filtered_fastq/{sample}", sample=config["samples"])
 
 
 
