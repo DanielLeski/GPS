@@ -1,0 +1,20 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 12
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	2	filter_fastq
+	1	setup_inputs
+	3
+
+[Mon Jul  5 00:40:49 2021]
+rule filter_fastq:
+    input: /home/dan/camda/CAMDA20_MetaSUB_CSD16_BCN_001_1.fastq.gz
+    output: data/filtered_fastq/CAMDA20_MetaSUB_CSD16_BCN_001_1.fastq.gz.filtered.gz
+    jobid: 1
+    wildcards: sample=CAMDA20_MetaSUB_CSD16_BCN_001_1.fastq.gz
+    threads: 4
+
+RuleException in line 3 of /home/dan/fun/GPS/Snakefile:
+'Params' object has no attribute 'min_mapping_qual'

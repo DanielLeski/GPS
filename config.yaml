@@ -1,3 +1,5 @@
-#inputs of the fastq.gz files
-input_fastq_dir: /home/dan/camda
+input: /home/dan/camda
 
+samples: [CAMDA20_MetaSUB_CSD16_BCN_001_1.fastq.gz, CAMDA20_MetaSUB_CSD16_BCN_001_2.fastq.gz]
+
+kmer_size: 31

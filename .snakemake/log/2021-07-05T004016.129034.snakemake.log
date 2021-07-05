@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 3 of /home/dan/fun/GPS/Snakefile:
+Missing input files for rule filter_fastq:
+/home/dan/camda/CAMDA20_MetaSUB_CSD16_BCN_001_1.fastq.gz.fastq.gz
