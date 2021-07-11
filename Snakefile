@@ -1,52 +1,38 @@
-configfile: "/home/dan/fun/GPS/config.yaml"
+configfile: "config.yaml"
 
-rule link_fastq:
-    input:
-        src=lambda wildcards: "%s/{samples}" % config['input_fastq_dir']
-    output:
-        "data/filtered_fastq/{sample}"
-    threads:
-        1
-    shell:
-        "ln -s {input.src} {output}"
+#extract kmers
+rule extract_kmers:
+     input:
+         k="data/filtered_fastq/{sample}.fastq"
+     params:
+         kmer_size=config["kmer_size"]
+     output:
+          jf="data/kmer_counts/{sample}.jf"
+     threads:
+          3
+     shell:
+         "jellyfish count -t {threads} -m {params.kmer_size} -s 1000M -C -o {output.jf} {input.k}"
 
 rule filter_fastq:
      input:
-         fastq="/home/dan/camda/{sample}"
+         k="data/kmer_counts/{sample}.jf"
      output:
-         "data/filtered_fastq/{sample}"
+         b="data/data_filtered_fastq/{sample}.counts"
      threads:
-         4
+         6
      shell:
-        "fastqc {input.fastq} {output}"  
+        "jellyfish dump -c -L 2 {input.k} > {output.b}"
 
 
-#top-level rule
-rule setup_inputs:
+rule dumping:
     input:
-        filtered_fastq=expand("data/filtered_fastq/{sample}", sample=config["samples"])
+        expand("data/data_filtered_fastq/{sample}.counts", sample=config["samples"])
+
+rule counting:
+    input:
+        expand("data/kmer_counts/{sample}.jf", sample=config["samples"])
 
 
-
-
-
-
-
-# Rule 0: Link the files like shown within the other pipeline 
-
-# Rule 1: Opening and writing the files these fastq.gz files into a different directory
-#  input: from config file
-#  output: getting the files into a specific directory
-
-## Don't forget to count the kmers from the files
-
-#Rule 2: Filtering these files based on based counts that show up
-#  input: getting the files from rule 1 
-#  output: creating a directory where we store the filtered files
-
-#Rule 3: sorting
-#  input: kmers and the files fro mthe filtering files
-#  output: sorted files with the occuranecs or kmers
 
 #rules 4-N:
 #  creating rules that run different strategies such as each classifer and technique and# etc
