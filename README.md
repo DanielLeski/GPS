@@ -1,7 +1,4 @@
 # GPS
 
-
-
-### Resources:
-- https://wikis.utexas.edu/display/CoreNGSTools/Working+with+FASTQ+files
-
+### Papers I found Interesting:
+- https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5374684/
