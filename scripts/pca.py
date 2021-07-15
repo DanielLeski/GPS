@@ -66,7 +66,7 @@ if __name__ == "__main__":
      
     feature_matrix = np.vstack(matrices)
 
-    pca = PCA(n_components = 6, whiten=True)
+    pca = PCA(n_components = 2, whiten=True)
     proj = pca.fit_transform(feature_matrix)
     
     

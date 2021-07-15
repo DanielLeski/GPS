@@ -71,16 +71,17 @@ def parse_args():
 
     parser.add_argument("--binary",
                         action="store_true",
-                        help="Use binary features")
+                        help="Use binary features",
+                        required=False)
 
     parser.add_argument("--n-features",
                         type=int,
                         default=20,
                         help="Number of hashed features in base 2")
 
-    parser.add_argument('--feature-scaling-before', choices=['binary', 'counts', 'log1p'], required=True)
+    parser.add_argument('--feature-scaling-before', choices=['binary', 'counts', 'log1p'], required=False)
  
-    parser.add_argument('--feature-scaling-after', choices=['binary', 'counts', 'log1p'], required=True)
+    parser.add_argument('--feature-scaling-after', choices=['binary', 'counts', 'log1p'], required=False)
   
 
     return parser.parse_args()
