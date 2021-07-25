@@ -79,9 +79,9 @@ def parse_args():
                         default=20,
                         help="Number of hashed features in base 2")
 
-    parser.add_argument('--feature-scaling-before', choices=['binary', 'counts', 'log1p'], required=False)
+    parser.add_argument('--feature-scaling-before', choices=['binary', 'counts', 'log1p'], required=True)
  
-    parser.add_argument('--feature-scaling-after', choices=['binary', 'counts', 'log1p'], required=False)
+    parser.add_argument('--feature-scaling-after', choices=['binary', 'counts', 'log1p'], required=True)
   
 
     return parser.parse_args()

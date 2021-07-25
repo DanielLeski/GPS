@@ -66,10 +66,11 @@ if __name__ == "__main__":
      
     feature_matrix = np.vstack(matrices)
 
-    pca = PCA(n_components = 2, whiten=True)
+    pca = PCA(n_components = 6, whiten=True)
     proj = pca.fit_transform(feature_matrix)
     
-    
+    print(proj[0], proj[1])
+
     zz = len(sample_labels)
     labels = np.array(labels)
     sample_labels = np.array(sample_labels)
