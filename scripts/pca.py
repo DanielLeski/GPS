@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import argparse
-
 from joblib import load
 import numpy as np
 import scipy.sparse as sp
@@ -69,13 +68,13 @@ if __name__ == "__main__":
     pca = PCA(n_components = 6, whiten=True)
     proj = pca.fit_transform(feature_matrix)
     
-    print(proj[0], proj[1])
-
     zz = len(sample_labels)
     labels = np.array(labels)
     sample_labels = np.array(sample_labels)
     for label in set(labels):
         mask = labels == label
+        print("0", proj[mask,0])
+        print("1", proj[mask,1])
         plt.scatter(proj[mask, 0], proj[mask, 1], label=label)
     #Used for subsampling data and using it to determine outliers    
     plt.legend()

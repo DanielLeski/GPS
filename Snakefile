@@ -1,4 +1,4 @@
-configfile: "config.yaml"
+configfile: "configCamda.yaml"
 
 #extract kmers
 rule extract_kmers:
@@ -23,16 +23,6 @@ rule filter_fastq:
          4
      shell:
         "jellyfish dump -c -L 2 {input.k} > {output.b}"
-
-rule sorting_kmers:
-     input:
-        count="data/kmer_counts/{sample}.counts"
-     output:
-        sorted_counts="data/kmer_counts_sorted/{sample}.sorted.counts"
-     threads:
-        6
-     shell:
-        "cut -f 1 -d \" \" {input.count} | sort -S 16G -parallel {threads} > {output.sorted_counts}"
 
 rule extract_features:
      input:
@@ -154,7 +144,7 @@ rule log1p_binary_feature:
      output:
         feature_matrix="data/log1p_features_binary/{sample}.features"
      threads:
-        4
+        2
      shell:
         "scripts/feature_extractor.py --kmer-freq-fl {input.kmer_counts} --n-features {params.n_features} --feature-matrix {output.feature_matrix} --feature-scaling-before log1p --feature-scaling-after binary"
 
@@ -276,15 +266,6 @@ rule pca_count_binary:
         4
      shell:
         "scripts/pca.py --feature-matrices {input.feature_matrices} --groups-fl {params.groups_fl} --plot-fl {output.plot}"
-
-    #rule dumping:
- #   input:
- #       kmer_counts=expand("data/kmer_counts/{sample}.counts", sample=config["samples"])
-
-#rule counting:
-#    input:
-#       jf=expand("data/camda/{sample}.fastq", sample=config["samples"])
-
 
 rule dumping:
     input:
